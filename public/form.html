@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foodie Order Form</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+    />
+    <!-- For .png files -->
+    <link rel="icon" href="/public/images/favicon3.png" type="image/png" />
+    <link rel="stylesheet" href="form.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- Custom Loader -->
+    <div id="loader" data-aos="fade-out">
+      <img src="/images/Burger Animation.gif" alt="Loading..." />
+    </div>
+
+    <section class="sub-header" data-aos="fade-down"></section>
+
+    <section class="contact-us" data-aos="fade-up">
+      <a href="index.html" class="arrow" id="next" data-aos="fade-right">
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
+      <img
+        src="/public/images/delivery-boy-with-phone.png"
+        alt="Delivery Boy"
+        data-aos="zoom-in"
+      />
+
+      <div class="contact-col" data-aos="fade-left">
+        <form id="orderForm">
+          <div class="name-row">
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
+              placeholder="First Name"
+              required
+            />
+            <input
+              type="text"
+              name="middleName"
+              id="middleName"
+              placeholder="Middle Name"
+            />
+            <input
+              type="text"
+              name="lastName"
+              id="lastName"
+              placeholder="Last Name"
+              required
+            />
+          </div>
+
+          <input
+            type="tel"
+            name="phone"
+            id="phone"
+            data-aos="fade-right"
+            placeholder="Phone Number"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            data-aos="fade-left"
+            placeholder="Email Address"
+            required
+          />
+          <textarea
+            name="address"
+            rows="3"
+            data-aos="fade-up"
+            placeholder="Full Address"
+            required
+          ></textarea>
+
+          <select id="foodItem" name="foodItem" data-aos="zoom-in" required>
+            <option value="">-- Select Food Item --</option>
+            <option value="Double Beef Burger">Double Beef Burger</option>
+            <option value="Veggie Pizza">Veggie Pizza</option>
+            <option value="Fried Chicken">Fried Chicken</option>
+            <option value="Chicken Roll">Chicken Roll</option>
+            <option value="Sub Sandwich">Sub Sandwich</option>
+            <option value="Chicken Lasagna">Chicken Lasagna</option>
+            <option value="Italian Spaghetti">Italian Spaghetti</option>
+            <option value="Spring Roll">Spring Roll</option>
+          </select>
+
+          <input
+            type="number"
+            name="quantity"
+            id="quantity"
+            data-aos="fade-up"
+            placeholder="Quantity (1-10)"
+            min="1"
+            value="1"
+            required
+          />
+          <input
+            type="text"
+            id="unitPrice"
+            placeholder="Unit Price"
+            data-aos="fade-right"
+            readonly
+          />
+          <input
+            type="text"
+            id="totalPrice"
+            data-aos="fade-left"
+            placeholder="Total Price"
+            readonly
+          />
+          <textarea
+            name="instructions"
+            rows="3"
+            data-aos="fade-up"
+            placeholder="Special Instructions (optional)"
+          ></textarea>
+
+          <button type="submit" class="btn" data-aos="zoom-in-up">
+            Place Order
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- Brand -->
+        <div class="footer-col brand" data-aos="fade-up">
+          <h2><span>Foodie.</span></h2>
+          <p>We will fill your tummy with delicious food with fast delivery</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-x-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-google"></i></a>
+          </div>
+        </div>
+
+        <!-- Menu -->
+        <div class="footer-col" data-aos="fade-up">
+          <h4>Our Menu</h4>
+          <ul>
+            <li><a href="#">Special</a></li>
+            <li><a href="#">Popular</a></li>
+            <li><a href="#">Categories</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div class="footer-col" data-aos="fade-up">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">Why Foodie</a></li>
+            <li><a href="#">Partner with us</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">FAQ's</a></li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div class="footer-col" data-aos="fade-up">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Account</a></li>
+            <li><a href="#">Support center</a></li>
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contacts</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      const form = document.getElementById("orderForm");
+
+      // Auto-capitalize first letter
+      ["firstName", "middleName", "lastName"].forEach((id) => {
+        const input = document.getElementById(id);
+        input.addEventListener("input", () => {
+          if (input.value.length > 0) {
+            input.value =
+              input.value.charAt(0).toUpperCase() + input.value.slice(1);
+          }
+        });
+      });
+
+      // Force email lowercase
+      const emailInput = document.getElementById("email");
+      emailInput.addEventListener("input", () => {
+        emailInput.value = emailInput.value.toLowerCase();
+      });
+
+      // Restrict phone to 10 digits
+      const phoneInput = document.getElementById("phone");
+      phoneInput.addEventListener("input", () => {
+        phoneInput.value = phoneInput.value.replace(/\D/g, "");
+        if (phoneInput.value.length > 10) {
+          phoneInput.value = phoneInput.value.slice(0, 10);
+        }
+      });
+
+      // Restrict quantity 1–10
+      const quantityInput = document.getElementById("quantity");
+      quantityInput.addEventListener("input", () => {
+        quantityInput.value = quantityInput.value.replace(/\D/g, "");
+        if (parseInt(quantityInput.value) > 10) {
+          quantityInput.value = "10";
+        }
+        if (quantityInput.value.startsWith("0")) {
+          quantityInput.value = quantityInput.value.replace(/^0+/, "");
+        }
+      });
+
+      // Loader fade
+      window.addEventListener("load", function () {
+        const loader = document.getElementById("loader");
+        loader.classList.add("hidden");
+      });
+
+      // Unified submit listener
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        if (!/^\d{10}$/.test(phoneInput.value)) {
+          alert("Phone number must be exactly 10 digits.");
+          return;
+        }
+
+        if (!/^[a-z0-9._%+-]+@gmail\.com$/.test(emailInput.value)) {
+          alert(
+            "Email must be a valid Gmail address (e.g., example@gmail.com)."
+          );
+          return;
+        }
+
+        if (
+          quantityInput.value === "" ||
+          parseInt(quantityInput.value) < 1 ||
+          parseInt(quantityInput.value) > 10
+        ) {
+          alert("Quantity must be between 1 and 10.");
+          return;
+        }
+
+        if (document.getElementById("foodItem").value === "") {
+          alert("Please select a food item.");
+          return;
+        }
+
+        const formData = {
+          firstName: document.getElementById("firstName").value.trim(),
+          middleName: document.getElementById("middleName").value.trim(),
+          lastName: document.getElementById("lastName").value.trim(),
+          phone: document.getElementById("phone").value.trim(),
+          email: document.getElementById("email").value.trim(),
+          address: document
+            .querySelector("textarea[name='address']")
+            .value.trim(),
+          foodItem: document.getElementById("foodItem").value.trim(),
+          quantity: document.getElementById("quantity").value.trim(),
+          instructions: document
+            .querySelector("textarea[name='instructions']")
+            .value.trim(),
+        };
+
+        console.log("📤 Sending form data:", formData);
+
+        try {
+          const res = await fetch("https://foddie-production.up.railway.app/submit-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          });
+
+          let data;
+          try {
+            data = await res.json();
+          } catch (jsonError) {
+            console.error("❌ Failed to parse JSON:", jsonError);
+            alert("Server returned invalid JSON.");
+            return;
+          }
+
+          console.log("📥 Response from server:", data);
+
+          if (!res.ok) {
+            alert(`Error: ${data.error || "Something went wrong!"}`);
+            return;
+          }
+
+          alert(
+            `${data.message}\nUnit Price: ₹${data.unitPrice}\nTotal Price: ₹${data.totalPrice}`
+          );
+          form.reset();
+        } catch (err) {
+          console.error("❌ Network error:", err);
+          alert("⚠️ Network or server error!");
+        }
+      });
+
+      // unit and total
+
+      const foodPrices = {
+        "Double Beef Burger": 249,
+        "Veggie Pizza": 199,
+        "Fried Chicken": 179,
+        "Chicken Roll": 149,
+        "Sub Sandwich": 129,
+        "Chicken Lasagna": 229,
+        "Italian Spaghetti": 159,
+        "Spring Roll": 99,
+      };
+
+      const foodItemInput = document.getElementById("foodItem");
+      const unitPriceInput = document.getElementById("unitPrice");
+      const totalPriceInput = document.getElementById("totalPrice");
+
+      // Update prices dynamically
+      function updatePrices() {
+        const foodItem = foodItemInput.value;
+        const quantity = parseInt(quantityInput.value) || 0;
+
+        if (foodItem && foodPrices[foodItem]) {
+          const unitPrice = foodPrices[foodItem];
+          unitPriceInput.value = "₹" + unitPrice;
+
+          const total = unitPrice * quantity;
+          totalPriceInput.value = quantity > 0 ? "₹" + total : "";
+        } else {
+          unitPriceInput.value = "";
+          totalPriceInput.value = "";
+        }
+      }
+
+      // Attach events
+      foodItemInput.addEventListener("change", updatePrices);
+      quantityInput.addEventListener("input", updatePrices);
+      // animation ads
+      AOS.init({
+        duration: 1000,
+        once: true,
+      });
+    </script>
+  </body>
+</html>
